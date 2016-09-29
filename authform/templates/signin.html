@@ -1,7 +1,20 @@
-<form action="{% url 'authform:signin_api' %}" method="post">
-  {% csrf_token %}
-  <input name="username" placeholder="Username"/>
-  <input name="password" placeholder="Password"/>
-  <input type="submit" value="Sign in"/>
-  <a href="{% url 'authform:signup' %}">Don't have an account? Sign up now</a>
+{% load static %}
+<link rel="stylesheet" href="{% static 'uikit2/css/uikit.almost-flat.min.css' %}" />
+<script src="{% static 'jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'uikit2/js/uikit.min.js' %}"></script>
+<form class="uk-form" action="{% url 'authform:signin_api' %}" method="post">
+    {% csrf_token %}
+    <fieldset data-uk-margin>
+        <legend>
+            Sign in form
+        </legend>
+        <div class="uk-form-row">
+            <input type="text" class="uk-margin-small-top {% if error %}uk-form-danger{% endif %}" name="username" placeholder="Username" />
+        </div>
+        <div class="ul-form-row">
+            <input type="text" class="uk-margin-small-top {% if error %}uk-form-danger{% endif %}" name="password" placeholder="Password" />
+        </div>
+        <button class="uk-button">Sign in</button>
+        <a href="{% url 'authform:signup' %}">Don't have an account? Sign up now</a>
+    </fieldset>
 </form>

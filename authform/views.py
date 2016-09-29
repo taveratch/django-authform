@@ -10,16 +10,19 @@ import json
 # ==== Views ====
 
 def index(request):
+    if('error' not in request.session):
+        request.session['error'] = False
     return HttpResponseRedirect(reverse('authform:signin'))
 
 def signin(request):
-    return render(request, 'signin.html')
+    error = request.session['error']
+    request.session['error'] = False
+    return render(request, 'signin.html', {'error': error})
 
 def signup(request):
     return render(request, 'signup.html')
 
 def success(request):
-    print(request.session['user'])
     user = request.session['user']
     return render(request, 'success.html', {'message': "Success : (%s)" % user})
 
@@ -36,6 +39,7 @@ def signin_api(request):
         print(request.user)
         return HttpResponseRedirect(reverse('authform:success'))
     else:
+        request.session['error'] = True
         return HttpResponseRedirect(reverse('authform:signin'))
 
 def signup_api(request):
