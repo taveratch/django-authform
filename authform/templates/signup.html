@@ -1,0 +1,8 @@
+<form action="{% url 'authform:signup_api'%}" method="post">
+  {% csrf_token %}
+  <input name="username" placeholder="Username"/>
+  <input name="password" placeholder="Password"/>
+  <input name="confirm-password" placeholder="Confirm password"/>
+  <input type="submit" value="Sign up"/>
+  <a href="{% url 'authform:signin' %}">Sign in now</a>
+</form>
