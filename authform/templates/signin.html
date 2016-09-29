@@ -1,0 +1,6 @@
+<form action="{% url 'authform:signin_api' %}" method="post">
+  {% csrf_token %}
+  <input name="username" placeholder="Username"/>
+  <input name="password" placeholder="Password"/>
+  <input type="submit" value="Sign in"/>
+</form>
